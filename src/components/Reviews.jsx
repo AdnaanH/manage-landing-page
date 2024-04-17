@@ -3,6 +3,20 @@ import Card from "./Card";
 
 const Cards = ({ cards }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768); // Adjust the breakpoint as needed
+    };
+
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -13,17 +27,17 @@ const Cards = ({ cards }) => {
   }, [cards]);
 
   const slides = () => {
-    const endIndex = currentIndex + 3;
+    const endIndex = isSmallScreen ? currentIndex + 1 : currentIndex + 3;
     let slicedCards = cards.slice(currentIndex, endIndex);
-    
-    if (slicedCards.length < 3) {
+
+    if (!isSmallScreen && slicedCards.length < 3) {
       const remainingCards = 3 - slicedCards.length;
       slicedCards = [...slicedCards, ...cards.slice(0, remainingCards)];
     }
 
     return slicedCards.map((card, index) => (
-      <Card key={index}>          
-        <img src={card.imgUrl} alt={card.name} className="w-[75px] h-[75px] relative -top-8"/>
+      <Card key={index}>
+        <img src={card.imgUrl} alt={card.name} className="w-[75px] h-[75px] relative -top-8" />
         <div className="flex flex-col items-center justify-center w-full">
           <h1 className="font-bold text-FmarineBlue font-BeVietnam text-base mb-2">{card.name}</h1>
           <p className="text-center text-FcoolGray text-sm font-BeVietnam font-bold mb-6">"{card.comment}"</p>
@@ -33,7 +47,7 @@ const Cards = ({ cards }) => {
   };
 
   return (
-    <div className="flex justify-between items-center gap-8 py-20 w-full">
+    <div className={`flex justify-${isSmallScreen ? 'center' : 'between'} items-center sm:gap-6 gap-0 py-20 w-full`}>
       {slides()}
     </div>
   );

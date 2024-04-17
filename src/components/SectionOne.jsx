@@ -1,9 +1,9 @@
 const SectionOne = () => {
   return (
-    <section className='min-h-screen w-full flex justify-between items-start py-16 px-24'>
-        <div className="w-5/12 flex flex-col gap-10">
-            <h1 className="text-4xl font-bold font-BeVietnam text-FmarineBlue">What’s different about Manage?</h1>
-            <p className="font-BeVietnam text-FcoolGray w-10/12 font-normal text-xl">Manage provides all the functionality your team needs, without the complexity. Our software is tailor-made for modern digital product teams.</p>
+    <section className='sm:min-h-screen min-h-96 w-full flex sm:flex-row flex-col justify-between items-start py-16 sm:px-24 px-6'>
+        <div className="sm:w-5/12 w-full flex flex-col gap-10">
+            <h1 className="sm:text-4xl text-3xl sm:text-start text-center font-bold font-BeVietnam text-FmarineBlue">What’s different about Manage?</h1>
+            <p className="font-BeVietnam text-FcoolGray sm:w-10/12 w-full sm:text-start text-center font-normal sm:text-xl text-base">Manage provides all the functionality your team needs, without the complexity. Our software is tailor-made for modern digital product teams.</p>
         </div>
         <div className="w-6/12 flex flex-col justify-start items-start gap-6">
             <div className="flex justify-between items-start gap-10">
